@@ -181,6 +181,7 @@ impl<F: Field> ExecutionGadget<F> for BeginTxGadget<F> {
             tx.callee_address.to_word(),
             not::expr(callee_not_exists.expr()),
             tx.is_create.expr(),
+            code_hash.to_word(),
             tx.value.clone(),
             &mut reversion_info,
             Some(tx.mul_gas_fee_by_gas.product().clone()),
