@@ -401,10 +401,16 @@ impl<C: SubCircuit<Fr> + Circuit<Fr>> IntegrationTest<C> {
     fn test_root_variadic(&mut self, mock_prover: &MockProver<Fr>) {
         let fixed = mock_prover.fixed();
 
+        log::info!("circuit name: {}", self.name);
+        
+
         match self.root_fixed.clone() {
             Some(prev_fixed) => {
                 fixed.iter().enumerate().zip_eq(prev_fixed.iter()).for_each(
                     |((index, col1), col2)| {
+                      // print out col1 size and col2 size
+                      log::info!("col1 size: {:?}", col1.len());
+                      log::info!("col2 size: {:?}", col2.len());
                         if !col1.eq(col2) {
                             println!("on column index {} not equal", index);
                             col1.iter().enumerate().zip_eq(col2.iter()).for_each(
@@ -428,6 +434,7 @@ impl<C: SubCircuit<Fr> + Circuit<Fr>> IntegrationTest<C> {
             }
             None => {
                 self.root_fixed = Some(fixed.clone());
+                log::info!("root circuit fixed columns are set");
             }
         };
 
