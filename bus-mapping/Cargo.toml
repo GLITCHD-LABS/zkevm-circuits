@@ -23,6 +23,7 @@ serde_json = "1.0.66"
 strum = "0.24"
 strum_macros = "0.24"
 revm-precompile = { version = "=2.2.0", default-features = false, optional = true }
+hex = "0.4.3"
 
 [dev-dependencies]
 hex = "0.4.3"

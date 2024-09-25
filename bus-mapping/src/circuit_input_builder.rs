@@ -192,7 +192,7 @@ impl Default for FixedCParams {
             max_calldata: 256,
             // TODO: Check whether this value is correct or we should increase/decrease based on
             // this lib tests
-            max_copy_rows: 16384,
+            max_copy_rows: 16378,
             max_exp_steps: 1000 / 7, // exp_circuit::OFFSET_INCREMENT = 7
             max_bytecode: 512,
             max_evm_rows: 0,
@@ -1172,7 +1172,7 @@ pub fn build_state_code_db(
     for (_address, code) in codes {
         // calculate code hash
         let code_hash = keccak256(&code);
-        log::info!("Code hash {:?} ", String::from_utf8(code_hash.to_vec()));
+        log::info!("Code hash {:?} ", hex::encode(code_hash));
         code_db.insert(code.clone());
     }
     (sdb, code_db)

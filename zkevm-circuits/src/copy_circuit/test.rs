@@ -189,7 +189,7 @@ fn copy_circuit_valid_codecopy() {
     let builder = gen_codecopy_data();
     let block = block_convert::<Fr>(&builder).unwrap();
     let chunk = chunk_convert::<Fr>(&block, &builder).unwrap().remove(0);
-    assert_eq!(test_copy_circuit_from_block(10, block, chunk), Ok(()));
+    assert_eq!(test_copy_circuit_from_block(14, block, chunk), Ok(()));
 }
 
 #[test]
@@ -213,7 +213,7 @@ fn copy_circuit_valid_tx_log() {
     let builder = gen_tx_log_data();
     let block = block_convert::<Fr>(&builder).unwrap();
     let chunk = chunk_convert::<Fr>(&block, &builder).unwrap().remove(0);
-    assert_eq!(test_copy_circuit_from_block(10, block, chunk), Ok(()));
+    assert_eq!(test_copy_circuit_from_block(14, block, chunk), Ok(()));
 }
 
 #[test]
@@ -245,7 +245,7 @@ fn copy_circuit_invalid_codecopy() {
     let chunk = chunk_convert::<Fr>(&block, &builder).unwrap().remove(0);
 
     assert_error_matches(
-        test_copy_circuit_from_block(10, block, chunk),
+        test_copy_circuit_from_block(14, block, chunk),
         vec!["Memory lookup", "Bytecode lookup"],
     );
 }
@@ -296,7 +296,7 @@ fn copy_circuit_invalid_tx_log() {
     let chunk = chunk_convert::<Fr>(&block, &builder).unwrap().remove(0);
 
     assert_error_matches(
-        test_copy_circuit_from_block(10, block, chunk),
+        test_copy_circuit_from_block(14, block, chunk),
         vec!["Memory lookup", "TxLog lookup"],
     );
 }
