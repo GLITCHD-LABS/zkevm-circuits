@@ -12,7 +12,7 @@ mod tracer_tests;
 mod transaction;
 mod withdrawal;
 
-use self::{access::gen_state_access_trace, chunk::Chunk};
+use self::{access::gen_state_access_trace};
 use crate::{
     error::Error,
     evm::opcodes::{gen_associated_ops, gen_associated_steps},
@@ -26,7 +26,7 @@ use crate::{
 pub use access::{Access, AccessSet, AccessValue, CodeSource};
 pub use block::{Block, BlockContext};
 pub use call::{Call, CallContext, CallKind};
-pub use chunk::ChunkContext;
+pub use chunk::{Chunk, ChunkContext};
 use core::fmt::Debug;
 use eth_types::{
     self, geth_types,

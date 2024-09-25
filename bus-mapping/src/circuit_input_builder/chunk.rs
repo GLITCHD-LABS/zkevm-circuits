@@ -1,6 +1,7 @@
 use super::{Call, ExecStep, FixedCParams};
 use crate::operation::RWCounter;
 
+/// Circuit Input related to a chunk
 #[derive(Debug, Default, Clone)]
 pub struct Chunk {
     /// current context

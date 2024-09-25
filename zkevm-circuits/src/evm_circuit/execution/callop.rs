@@ -241,6 +241,7 @@ impl<F: Field> ExecutionGadget<F> for CallOpGadget<F> {
         // skip the transfer (this is necessary for non-existing accounts, which
         // will not be created when value is 0 and so the callee balance lookup
         // would be invalid).
+        let code_hash_previous = cb.query_word_unchecked();
         let transfer = cb.condition(is_call.expr() * is_precheck_ok.expr(), |cb| {
             TransferGadget::construct(
                 cb,
@@ -248,6 +249,7 @@ impl<F: Field> ExecutionGadget<F> for CallOpGadget<F> {
                 callee_address.to_word(),
                 not::expr(call_gadget.callee_not_exists.expr()),
                 false.expr(),
+                code_hash_previous.to_word(),
                 call_gadget.value.clone(),
                 &mut callee_reversion_info,
                 None,

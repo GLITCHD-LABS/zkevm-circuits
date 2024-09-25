@@ -1078,12 +1078,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "env"
-version = "0.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "876927d21ef1ae98001c8c35a1d8dfd682136914b23ef04276820fa6d43c3630"
-
-[[package]]
 name = "env_logger"
 version = "0.9.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1793,7 +1787,7 @@ dependencies = [
 [[package]]
 name = "halo2-base"
 version = "0.2.2"
-source = "git+https://github.com/scroll-tech/halo2-lib?branch=develop#40ba7e3bbf013b55c59283534c9489701f9212d0"
+source = "git+https://github.com/scroll-tech/halo2-lib?rev=40ba7e3#40ba7e3bbf013b55c59283534c9489701f9212d0"
 dependencies = [
  "ff",
  "halo2_proofs",
@@ -1808,7 +1802,7 @@ dependencies = [
 [[package]]
 name = "halo2-ecc"
 version = "0.2.2"
-source = "git+https://github.com/scroll-tech/halo2-lib?branch=develop#40ba7e3bbf013b55c59283534c9489701f9212d0"
+source = "git+https://github.com/scroll-tech/halo2-lib?rev=40ba7e3#40ba7e3bbf013b55c59283534c9489701f9212d0"
 dependencies = [
  "ff",
  "group",
@@ -1849,6 +1843,7 @@ dependencies = [
  "blake2b_simd",
  "ff",
  "group",
+ "hex",
  "lazy_static",
  "num-bigint",
  "num-traits",
@@ -1858,6 +1853,8 @@ dependencies = [
  "rand",
  "rand_core",
  "rayon",
+ "serde",
+ "serde_arrays",
  "static_assertions",
  "subtle",
 ]
@@ -2183,7 +2180,6 @@ name = "integration-tests"
 version = "0.1.0"
 dependencies = [
  "bus-mapping",
- "env",
  "env_logger",
  "eth-types",
  "ethers",
@@ -2814,8 +2810,10 @@ dependencies = [
  "blake2b_simd",
  "ff",
  "group",
+ "hex",
  "lazy_static",
  "rand",
+ "serde",
  "static_assertions",
  "subtle",
 ]
@@ -3736,6 +3734,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "870026e60fa08c69f064aa766c10f10b1d62db9ccd4d0abb206472bee0ce3b32"
 dependencies = [
  "serde_derive",
+]
+
+[[package]]
+name = "serde_arrays"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "38636132857f68ec3d5f3eb121166d2af33cb55174c4d5ff645db6165cbef0fd"
+dependencies = [
+ "serde",
 ]
 
 [[package]]

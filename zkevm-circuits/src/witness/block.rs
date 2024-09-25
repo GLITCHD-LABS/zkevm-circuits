@@ -332,6 +332,7 @@ pub fn block_convert<F: Field>(
             map
         });
 
+    let keccak_inputs = circuit_input_builder::keccak_inputs(block, code_db)?;
     let mut block = Block {
         // randomness: F::from(0x100), // Special value to reveal elements after RLC
         randomness: F::from(0xcafeu64),
@@ -347,7 +348,7 @@ pub fn block_convert<F: Field>(
         feature_config: builder.feature_config,
         exp_circuit_pad_to: <usize>::default(),
         prev_state_root: block.prev_state_root,
-        keccak_inputs: circuit_input_builder::keccak_inputs(block, code_db)?,
+        keccak_inputs,
         precompile_events: block.precompile_events.clone(),
         eth_block: block.eth_block.clone(),
         end_block: block.end_block.clone(),

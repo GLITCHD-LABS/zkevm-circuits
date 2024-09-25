@@ -335,6 +335,7 @@ impl<F: Field, const IS_CREATE2: bool, const S: ExecutionState> ExecutionGadget<
                     contract_addr.to_word(),
                     false.expr(),
                     true.expr(),
+                    prev_code_hash.to_word(),
                     value.clone(),
                     &mut callee_reversion_info,
                     None,
