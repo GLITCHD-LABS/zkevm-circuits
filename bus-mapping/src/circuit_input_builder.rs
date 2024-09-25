@@ -45,6 +45,7 @@ use std::{
     collections::{HashMap, HashSet},
     ops::Deref,
 };
+use ethers_core::utils::keccak256;
 pub use transaction::{Transaction, TransactionContext};
 pub use withdrawal::{Withdrawal, WithdrawalContext};
 
@@ -191,7 +192,7 @@ impl Default for FixedCParams {
             max_calldata: 256,
             // TODO: Check whether this value is correct or we should increase/decrease based on
             // this lib tests
-            max_copy_rows: 1000,
+            max_copy_rows: 16378,
             max_exp_steps: 1000 / 7, // exp_circuit::OFFSET_INCREMENT = 7
             max_bytecode: 512,
             max_evm_rows: 0,
@@ -1150,6 +1151,12 @@ pub fn build_state_code_db(
         for storage_proof in proof.storage_proof {
             storage.insert(storage_proof.key, storage_proof.value);
         }
+
+        log::info!(
+            "Proof address {:?} and code hash {:?}",
+            &proof.address,
+            proof.code_hash
+        );
         sdb.set_account(
             &proof.address,
             state_db::Account {
@@ -1163,6 +1170,9 @@ pub fn build_state_code_db(
 
     let mut code_db = CodeDB::default();
     for (_address, code) in codes {
+        // calculate code hash
+        let code_hash = keccak256(&code);
+        log::info!("Code hash {:?} ", hex::encode(code_hash));
         code_db.insert(code.clone());
     }
     (sdb, code_db)
