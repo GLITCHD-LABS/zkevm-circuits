@@ -395,11 +395,11 @@ impl<F: Field> TransferToGadget<F> {
                 or::expr([not::expr(value_is_zero.expr()), is_create.expr()]),
             ]),
             |cb| {
-                cb.account_read(
-                    receiver_address.clone(),
-                    AccountFieldTag::CodeHash,
-                    prev_code_hash.clone(),
-                );
+                // cb.account_read(
+                //     receiver_address.clone(),
+                //     AccountFieldTag::CodeHash,
+                //     prev_code_hash.clone(),
+                // );
                 cb.account_write(
                     receiver_address.clone(),
                     AccountFieldTag::CodeHash,
