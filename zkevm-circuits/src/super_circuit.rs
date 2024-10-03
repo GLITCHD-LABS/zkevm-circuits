@@ -537,7 +537,29 @@ impl<F: Field> Circuit<F> for SuperCircuit<F> {
     }
 
     fn configure(_meta: &mut ConstraintSystem<F>) -> Self::Config {
-        unreachable!();
+        let circuits_params = FixedCParams {
+            total_chunks: 1,
+            max_txs: 1,
+            max_withdrawals: 5,
+            max_calldata: 32,
+            max_rws: 256,
+            max_copy_rows: 256,
+            max_exp_steps: 256,
+            max_bytecode: 512,
+            max_evm_rows: 0,
+            max_keccak_rows: 0,
+            max_vertical_circuit_rows: 0,
+        };
+        const TEST_MOCK_RANDOMNESS: u64 = 0x100;
+        Self::Config::new(_meta,
+          SuperCircuitParams {
+            max_txs: circuits_params.max_txs,
+            max_withdrawals: circuits_params.max_withdrawals,
+            max_calldata: circuits_params.max_calldata,
+            mock_randomness: TEST_MOCK_RANDOMNESS.into(),
+            feature_config: FeatureConfig::default(),
+        })
+        // unreachable!();
     }
 
     fn synthesize(

@@ -381,7 +381,6 @@ impl<F: Field> TransferToGadget<F> {
         receiver_address: WordLoHi<Expression<F>>,
         receiver_exists: Expression<F>,
         is_create: Expression<F>,
-        prev_code_hash: WordLoHi<Expression<F>>,
         value: Word32Cell<F>,
         mut reversion_info: Option<&mut ReversionInfo<F>>,
     ) -> Self {
@@ -487,7 +486,6 @@ impl<F: Field, const WITH_FEE: bool> TransferGadget<F, WITH_FEE> {
         receiver_address: WordLoHi<Expression<F>>,
         receiver_exists: Expression<F>,
         is_create: Expression<F>,
-        prev_code_hash: WordLoHi<Expression<F>>,
         value: Word32Cell<F>,
         reversion_info: &mut ReversionInfo<F>,
         gas_fee: Option<Word32Cell<F>>,
@@ -507,7 +505,6 @@ impl<F: Field, const WITH_FEE: bool> TransferGadget<F, WITH_FEE> {
             receiver_address,
             receiver_exists,
             is_create,
-            prev_code_hash,
             value,
             Some(reversion_info),
         );
